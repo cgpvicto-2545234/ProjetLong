@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizzeria</title>
+</head>
+<body>
+    <h1>Commander une pizza</h1>
+
+    <a href="/livraisons">
+        Voir les livraisons en attente
+    </a>
+
+    <form action="/resume" method="post">
+        <h2>Informations du client</h2>
+
+        <p>
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom"
+                   maxlength="100" required>
+        </p>
+
+        <p>
+            <label for="telephone">Téléphone :</label>
+            <input type="tel" id="telephone" name="telephone"
+                   maxlength="20" required>
+        </p>
+
+        <p>
+            <label for="adresse">Adresse de livraison :</label>
+            <input type="text" id="adresse" name="adresse"
+                   maxlength="255" required>
+        </p>
+
+        <h2>Votre pizza</h2>
+
+        <p>
+            <label for="id_croute">Croûte :</label>
+            <select id="id_croute" name="id_croute" required>
+                <option value="">Choisissez une croûte</option>
+                {% for croute in croutes %}
+                    <option value="{{ croute.id }}">
+                        {{ croute.nom_croute }}
+                    </option>
+                {% endfor %}
+            </select>
+        </p>
+
+        <p>
+            <label for="id_sauce">Sauce :</label>
+            <select id="id_sauce" name="id_sauce" required>
+                <option value="">Choisissez une sauce</option>
+                {% for sauce in sauces %}
+                    <option value="{{ sauce.id }}">
+                        {{ sauce.nom_sauce }}
+                    </option>
+                {% endfor %}
+            </select>
+        </p>
+
+        <fieldset>
+            <legend>Garnitures — maximum 4</legend>
+
+            {% for garniture in garnitures %}
+                <label>
+                    <input type="checkbox" name="garnitures"
+                           value="{{ garniture.id }}">
+                    {{ garniture.nom_garniture }}
+                </label>
+                <br>
+            {% endfor %}
+        </fieldset>
+
+        <p><button type="submit">Voir le résumé</button></p>
+    </form>
+</body>
+</html>

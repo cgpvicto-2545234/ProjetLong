@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Livraisons en attente</title>
+</head>
+<body>
+    <h1>Commandes en attente de livraison</h1>
+
+    <table border="1">
+        <tr>
+            <th>No commande</th>
+            <th>Date</th>
+            <th>Statut</th>
+            <th>Client</th>
+            <th>Téléphone</th>
+            <th>Adresse</th>
+            <th>Action</th>
+        </tr>
+        {% for commande in commandes %}
+        <tr>
+            <td>{{ commande.id }}</td>
+            <td>{{ commande.date_commande }}</td>
+            <td>{{ commande.statut }}</td>
+            <td>{{ commande.nom }}</td>
+            <td>{{ commande.telephone }}</td>
+            <td>{{ commande.adresse }}</td>
+            <td>
+                <form action="/livrer/{{ commande.id }}" method="post">
+                    <button type="submit">Compléter la livraison</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7">Aucune commande en attente.</td></tr>
+        {% endfor %}
+    </table>
+
+    <a href="/">Retour à l'accueil</a>
+</body>
+</html>
